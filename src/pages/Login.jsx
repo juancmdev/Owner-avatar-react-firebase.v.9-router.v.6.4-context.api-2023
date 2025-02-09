@@ -1,13 +1,23 @@
 import { useState } from "react";
+import { login } from "../config/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Me diste a Submit");
+    try {
+      const credentialUser = await login({ email: email, password: password });
+      console.log(credentialUser);
+    } catch (error) {}
+  };
+
   return (
     <>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Ingrese email"
