@@ -11,10 +11,14 @@ export default function UserContextProvider({ children }) {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+
       setUser(user);
     });
     return unsuscribe;
   }, []);
+
+  if (user === false) return <p>Loading app...</p>;
 
   return (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
